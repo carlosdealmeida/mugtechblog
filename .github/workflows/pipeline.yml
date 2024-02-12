@@ -1,0 +1,27 @@
+name: gh-pages
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:  
+  
+permissions: write-all  
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Publish with dotnet
+      run: dotnet publish mugtechblog/mugtechblog.sln --configuration Release --output build
+    - name: Deploy to Github Pages
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BASE_BRANCH: dev
+        BRANCH: master
+        FOLDER: build/wwwroot
+        SINGLE_COMMIT: true

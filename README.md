@@ -1,1 +1,1 @@
-# mugtechblog.github.io
+# mugtechblog
